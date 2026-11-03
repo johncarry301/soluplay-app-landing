@@ -182,6 +182,32 @@ container query, so the screens shrink instead of clipping. From 700px the track
 fixed-width snap rail again, with subtitles and the arrow controls returning at 900px.
 Reviews go two-column at 1080px.
 
+## Hosting on Vercel
+
+`vercel.json` pins the build for the Vercel project `soluplay-download`:
+
+```json
+{
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist"
+}
+```
+
+Import the repository `johncarry301/soluplay-app-landing` into that project and every push
+rebuilds the site. The default hostname is `soluplay-download.vercel.app`, subject to
+availability.
+
+Because the build uses `base: "./"`, the same `dist/` folder also works from a domain root
+or any sub-path, so adding a custom domain later needs no rebuild.
+
+### Custom domain
+
+The domain is added in the Vercel project under **Settings → Domains**, not in this
+repository. Vercel then asks for the DNS records to create; those records are only made
+after the domain owner approves them. Until a domain is added, the `vercel.app` hostname
+serves the site unchanged.
+
 ## Isolation
 
 This folder is self-contained. It depends on nothing but its own `package.json`, it
